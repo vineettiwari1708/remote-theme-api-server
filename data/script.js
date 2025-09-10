@@ -162,6 +162,24 @@ function renderFooter(footer) {
   const footerEl = document.createElement('footer');
   footerEl.className = 'site-footer';
 
+    (function () {
+  console.log('--- inject.php running ---');
+
+  var css = document.createElement('link');
+  // ...
+  document.head.appendChild(css);
+  console.log('Injected CSS');
+
+  window.REMOTE_CONFIG = { /*...*/ };
+  console.log('REMOTE_CONFIG:', window.REMOTE_CONFIG);
+
+  var js = document.createElement('script');
+  js.src = '.../script.js';
+  document.body.appendChild(js);
+  console.log('Injected script.js');
+})();
+
+
   const links = footer.links.map(link => `<a href="${link.link}">${link.label}</a>`).join('');
   footerEl.innerHTML = `<p>${footer.text}</p><p>${links}</p>`;
 
