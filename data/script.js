@@ -162,7 +162,17 @@ function renderFooter(footer) {
   const footerEl = document.createElement('footer');
   footerEl.className = 'site-footer';
 
-    (function () {
+ 
+
+
+  const links = footer.links.map(link => `<a href="${link.link}">${link.label}</a>`).join('');
+  footerEl.innerHTML = `<p>${footer.text}</p><p>${links}</p>`;
+
+  document.body.appendChild(footerEl);
+}
+
+
+   (function () {
   console.log('--- inject.php running ---');
 
   var css = document.createElement('link');
@@ -178,10 +188,3 @@ function renderFooter(footer) {
   document.body.appendChild(js);
   console.log('Injected script.js');
 })();
-
-
-  const links = footer.links.map(link => `<a href="${link.link}">${link.label}</a>`).join('');
-  footerEl.innerHTML = `<p>${footer.text}</p><p>${links}</p>`;
-
-  document.body.appendChild(footerEl);
-}
