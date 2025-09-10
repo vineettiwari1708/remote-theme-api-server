@@ -1,7 +1,7 @@
 (async function () {
   const pageSlug = document.body.getAttribute('data-page') || 'home';
 
-  const configUrl = 'https://yourserver.com/data/config.json';
+  const configUrl = 'https://raw.githubusercontent.com/vineettiwari1708/remote-theme-api-server/v1.2/data/config.json';
   const config = await fetch(configUrl).then(res => res.json());
   const { global, pages, shared_sections } = config;
 
