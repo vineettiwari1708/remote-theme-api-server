@@ -1,0 +1,6 @@
+{
+  "message": "This WordPress theme is licensed and running with remote configuration.",
+  "feature_flags": {
+    "enable_dark_mode": false
+  }
+}
