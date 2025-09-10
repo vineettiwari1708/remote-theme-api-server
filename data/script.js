@@ -25,21 +25,39 @@
 // ==============================
 
 
-(async function () {
-  const pageSlug = document.body.getAttribute('data-page') || 'home';
+// (async function () {
+//   const pageSlug = document.body.getAttribute('data-page') || 'home';
 
-  // const configUrl = '...';  // Remove this fetch line
-  // const config = await fetch(configUrl).then(res => res.json());
+//   // const configUrl = '...';  // Remove this fetch line
+//   // const config = await fetch(configUrl).then(res => res.json());
 
-  const config = window.REMOTE_CONFIG; // Use injected config directly
-  const { global, pages, shared_sections } = config;
+//   const config = window.REMOTE_CONFIG; // Use injected config directly
+//   const { global, pages, shared_sections } = config;
 
-  renderHeader(global.header);
+//   renderHeader(global.header);
 
-  const pageSections = pages[pageSlug]?.sections || [];
-  pageSections.forEach(section => renderSection(section, shared_sections));
+//   const pageSections = pages[pageSlug]?.sections || [];
+//   pageSections.forEach(section => renderSection(section, shared_sections));
 
-  renderFooter(global.footer);
+//   renderFooter(global.footer);
+// })();
+
+(function () {
+    const pageSlug = document.body.getAttribute('data-page') || 'home';
+    const config = window.REMOTE_CONFIG;
+
+    if (!config) {
+        console.error('REMOTE_CONFIG is not defined');
+        return;
+    }
+
+    const { global, pages, shared_sections } = config;
+
+    renderHeader(global.header);
+    const sections = pages[pageSlug]?.sections || [];
+
+    sections.forEach(section => renderSection(section, shared_sections));
+    renderFooter(global.footer);
 })();
 function renderHeader(header) {
   const headerEl = document.createElement('header');
