@@ -1,8 +1,13 @@
-(async function () {
-  const pageSlug = document.body.getAttribute('data-page') || 'home';
+(function () {
+  // STEP 1: Get the config from the global variable
+  const config = window.REMOTE_CONFIG;
 
-  const configUrl = 'https://raw.githubusercontent.com/vineettiwari1708/remote-theme-api-server/v1.2/data/config.json';
-  const config = await fetch(configUrl).then(res => res.json());
+  if (!config) {
+    console.error('REMOTE_CONFIG not found.');
+    return;
+  }
+
+  const pageSlug = document.body.getAttribute('data-page') || 'home';
   const { global, pages, shared_sections } = config;
 
   renderHeader(global.header);
@@ -13,13 +18,18 @@
   renderFooter(global.footer);
 })();
 
+// ==============================
+// Section Rendering Functions
+// ==============================
+
 function renderHeader(header) {
   const headerEl = document.createElement('header');
   headerEl.className = 'site-header';
 
-  const logo = document.createElement('div');
+  const logo = document.createElement('img');
   logo.className = 'logo';
-  logo.textContent = 'LOGO'; // or use image
+  logo.src = header.logo;
+  logo.alt = 'Logo';
 
   const nav = document.createElement('nav');
   header.menu.forEach(item => {
@@ -29,13 +39,19 @@ function renderHeader(header) {
     nav.appendChild(a);
   });
 
+  const cta = document.createElement('a');
+  cta.href = header.cta_button.link;
+  cta.textContent = header.cta_button.label;
+  cta.className = 'button';
+
   headerEl.appendChild(logo);
   headerEl.appendChild(nav);
+  headerEl.appendChild(cta);
   document.body.prepend(headerEl);
 }
 
 function renderSection(section, shared) {
-  let el = document.createElement('section');
+  const el = document.createElement('section');
   el.className = 'section-' + section.type;
 
   switch (section.type) {
@@ -60,7 +76,7 @@ function renderSection(section, shared) {
       break;
 
     case 'testimonials':
-      const testimonials = shared.testimonials;
+      const testimonials = shared.testimonials || [];
       el.innerHTML = testimonials.map(t => `
         <div class="testimonial">
           <blockquote>"${t.quote}"</blockquote>
@@ -77,7 +93,7 @@ function renderSection(section, shared) {
       break;
 
     case 'projects_list':
-      el.className += ' projects-grid';
+      el.classList.add('projects-grid');
       el.innerHTML = section.items.map(p => `
         <div class="project-item">
           <img src="${p.image}" alt="${p.title}">
