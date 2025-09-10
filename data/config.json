@@ -1,6 +1,90 @@
 {
-  "message": "This WordPress theme is licensed and running with remote configuration.",
-  "feature_flags": {
-    "enable_dark_mode": false
+  "global": {
+    "header": {
+      "logo": "https://yourcdn.com/logo.png",
+      "menu": [
+        { "label": "Home", "link": "/" },
+        { "label": "About", "link": "/about" },
+        { "label": "Services", "link": "/services" },
+        { "label": "Projects", "link": "/projects" },
+        { "label": "Contact", "link": "/contact" }
+      ],
+      "cta_button": {
+        "label": "Get Started",
+        "link": "/contact"
+      }
+    },
+    "footer": {
+      "text": "© 2025 Your Company. All rights reserved.",
+      "links": [
+        { "label": "Privacy Policy", "link": "/privacy" },
+        { "label": "Terms of Service", "link": "/terms" }
+      ]
+    }
+  },
+
+  "shared_sections": {
+    "hero": {
+      "title": "We Build Scalable Web Solutions",
+      "subtitle": "Custom software, websites, and more.",
+      "background": "https://yourcdn.com/images/hero-bg.jpg",
+      "button": {
+        "label": "See Our Work",
+        "link": "/projects"
+      }
+    },
+    "testimonials": [
+      {
+        "quote": "They built our site in record time!",
+        "author": "Jane Doe, CEO of Startup"
+      },
+      {
+        "quote": "Best dev agency I’ve ever worked with.",
+        "author": "John Smith, CTO"
+      }
+    ]
+  },
+
+  "pages": {
+    "home": {
+      "sections": [
+        { "type": "hero" },
+        { "type": "about", "title": "Who We Are", "content": "We are a team of experts..." },
+        { "type": "testimonials" },
+        { "type": "cta", "text": "Let's build something amazing!", "button": { "label": "Contact Us", "link": "/contact" } }
+      ]
+    },
+    "about": {
+      "sections": [
+        { "type": "hero", "title": "About Us", "subtitle": "Meet the team behind the code" },
+        { "type": "content", "title": "Our Mission", "content": "Deliver quality, always." }
+      ]
+    },
+    "services": {
+      "sections": [
+        { "type": "content", "title": "Web Development", "content": "Full-stack, scalable apps." },
+        { "type": "content", "title": "UI/UX Design", "content": "Human-centered design process." }
+      ]
+    },
+    "projects": {
+      "sections": [
+        {
+          "type": "projects_list",
+          "items": [
+            { "title": "E-Commerce Site", "image": "https://yourcdn.com/img1.jpg", "link": "/projects/ecommerce" },
+            { "title": "Mobile App", "image": "https://yourcdn.com/img2.jpg", "link": "/projects/mobile-app" }
+          ]
+        }
+      ]
+    },
+    "contact": {
+      "sections": [
+        {
+          "type": "contact_form",
+          "title": "Let’s Work Together",
+          "description": "Drop us a message and we’ll get back to you soon."
+        }
+      ]
+    }
   }
 }
